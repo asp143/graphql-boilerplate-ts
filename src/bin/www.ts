@@ -9,7 +9,7 @@
 
 // const http = require('http');
 import http from 'http';
-import app from '../app';
+import { app, apolloServer} from '../../app';
 
 /**
  * Get port from environment and store in Express.
@@ -91,5 +91,5 @@ function onListening() {
     const bind = typeof addr === 'string'
         ? `pipe ${addr}`
         : `port ${addr.port}`;
-    console.log(`Listening on${bind}`);
+    console.log(`Listening on ${bind} ${ apolloServer.graphqlPath}`);
 }
