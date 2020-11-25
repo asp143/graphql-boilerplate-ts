@@ -1,5 +1,6 @@
 
 import { Document, Model, model, Schema } from "mongoose";
+import { encrypt } from '../utils/brcypt';
 
 // Schema
 const UserSchema = new Schema({
@@ -54,7 +55,7 @@ export type IUserModel = Model<IUser>
 // Document middlewares
 UserSchema.pre<IUser>("save", function() {
     if (this.isModified("password")) {
-        this.password = 'hashbrown password';//hashPassword(this.password);
+        this.password = encrypt(this.password);
     }
 });
 
