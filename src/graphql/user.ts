@@ -1,3 +1,6 @@
+import type { IUser } from '../models/user';
+import type { SchemaType } from '../models';
+
 const typeDefs = `
 type User {
     _id: String
@@ -17,12 +20,8 @@ extend type Query {
 
 const resolvers = {
     Query: {
-        getUser: async (_: any, { id }: any, context: any): Promise<any> => {
-            return {
-                _id: id,
-                email: 'email',
-                password: 'password'
-            };
+        getUser: async (_: any, { id }: { id: string }, { model }: { model: SchemaType} ): Promise<IUser | null> => {
+            return model.User.findById(id); 
         }
     }
 };
